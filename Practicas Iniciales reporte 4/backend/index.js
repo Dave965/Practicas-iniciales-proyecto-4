@@ -15,6 +15,16 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
+app.post("/api/login",(req,res)=>{
+	const us_correo = req.body.us_correo
+	const us_password = req.body.us_password
+
+	const sqlSelect = "SELECT * FROM usuarios WHERE (correo, contra) = (?,?)"
+	db.query(sqlSelect,[us_correo,us_password],(err,result)=>{
+		res.send(result)
+	});
+});
+
 app.post("/api/register",(req,res)=>{
 	const us_carnet = req.body.us_carnet
 	const us_nombres = req.body.us_nombres
@@ -24,9 +34,9 @@ app.post("/api/register",(req,res)=>{
 
 	const sqlInsert = "INSERT INTO usuarios (registro, nombres, apellidos, contra, correo) VALUES (?, ?, ?, ?, ?);"
 	db.query(sqlInsert, [us_carnet, us_nombres, us_apellidos, us_password, us_correo], (err,result)=>{
-		console.log(result)
+		
 	});
-})
+});
 app.get("/",(req, res)=>{
 	res.send("Funcionó");
 });
