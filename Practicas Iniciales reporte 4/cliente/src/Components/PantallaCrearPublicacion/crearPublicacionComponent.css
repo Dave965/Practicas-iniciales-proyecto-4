@@ -1,0 +1,30 @@
+.form{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	width: 500px;
+	margin: 10px;
+}
+.guia{
+	margin-right: 20px;
+}
+.dropD{
+	max-width: 300px;
+}
+.container{
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	align-items: center;
+	justify-content: center;
+}
+.comentario{
+	margin: 20px;
+	width: 60vw;
+	height: 30vh;
+	resize: none;
+}
+.titulo{
+	width: 200px;
+}

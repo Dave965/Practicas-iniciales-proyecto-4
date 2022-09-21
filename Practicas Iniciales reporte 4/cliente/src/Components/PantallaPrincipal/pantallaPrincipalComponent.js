@@ -1,19 +1,18 @@
 import {PublicacionComponent} from "../PublicacionContainer/publicacionComponent"
-
-
-var datos = [
-  {"titulo":"Primera publicacion", "contenido":"Doe", "usuario":"David Noriega", "Curso":"practicas iniciales", "Cat":"Floriza", "fecha":"19-9-2022"},
-  {"titulo":"Segunda publicacion", "contenido":"Doe", "usuario":"David Noriega", "Curso":"IPC2", "Cat":"William", "fecha":"19-9-2022"},
-  {"titulo":"Tercera publicacion", "contenido":"Doe", "usuario":"David Noriega", "Curso":"LFP", "Cat":"Estuardo","fecha":"19-9-2022"}
-]
-
+import Axios from 'axios'
+import React, {useState, useEffect} from 'react'
 
 function PantallaPrincipalComponent() {
-  let publicaciones = []
-  for(var i =0;i<datos.length;i++){
-    var obj = datos[i];
-    publicaciones.push(<PublicacionComponent titulo = {obj["titulo"]} contenido = {obj["contenido"]} usuario = {obj["usuario"]} Curso = {obj["Curso"]} Cat = {obj["Cat"]} fecha = {obj["fecha"]}/>)
-  }
+  const [publicaciones, setPublicaciones] = useState("")
+  const pub = []
+  Axios.get("http://localhost:3001/api/todosPubli").then((res)=>{
+    var data = res.data;
+    for(var i=0;i<data.length;i++){
+        var actual=data[i];
+        pub.push(<PublicacionComponent titulo = {actual.titulo} contenido = {actual.mensaje} usuario = {actual.nUsuario+" "+actual.aUsuario} Curso = {actual.nCurso} Cat = {actual.nCat+" "+actual.aCat} fecha = {actual.fecha.slice(0, 10)}/>);
+      }
+      setPublicaciones(pub);
+    });
   return(
     <div>
       {publicaciones}

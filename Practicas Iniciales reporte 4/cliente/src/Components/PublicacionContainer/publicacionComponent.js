@@ -4,17 +4,17 @@ import './publicacionComponent.css';
 
 function PublicacionComponent(props){
   return (
-  <div id="container">
+  <div id="container_card">
 
-      <div class="card">
+      <div className="card">
 
-        <div class="card__details">
+        <div className="card__details">
 
-          <span class="tag">{props.Cat}</span>
+          <span className="tag">{props.Cat}</span>
 
-          <span class="tag">{props.Curso}</span>
+          <span className="tag">{props.Curso}</span>
 
-          <div class="name">{props.titulo}</div>
+          <div className="name">{props.titulo}</div>
 
           <p>{props.contenido}</p>
 

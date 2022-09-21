@@ -14,3 +14,11 @@
 	margin: 10px;
 	font-size: 25px;
 }
+.vinculo{
+	cursor: pointer;
+	font-size: 10px;
+	margin: 15px;
+	color: #2136E3;
+	text-decoration: underline;
+	width: fit-content;
+}

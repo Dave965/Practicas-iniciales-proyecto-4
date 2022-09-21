@@ -34,9 +34,45 @@ app.post("/api/register",(req,res)=>{
 
 	const sqlInsert = "INSERT INTO usuarios (registro, nombres, apellidos, contra, correo) VALUES (?, ?, ?, ?, ?);"
 	db.query(sqlInsert, [us_carnet, us_nombres, us_apellidos, us_password, us_correo], (err,result)=>{
-		
+
 	});
 });
+
+
+app.post("/api/publicar",(req,res)=>{
+	const us_usuario = req.body.us_usuario
+	const us_catedratico = req.body.us_catedratico
+	const us_titulo = req.body.us_titulo
+	const us_mensaje = req.body.us_mensaje
+	const us_fecha = req.body.us_fecha
+	const us_curso = req.body.us_curso
+
+	const sqlInsert = "INSERT INTO publicaciones (curso, catedratico, usuario, fecha, mensaje, titulo) VALUES (?, ?, ?, ?, ?, ?);"
+	db.query(sqlInsert, [us_curso, us_catedratico, us_usuario, us_fecha, us_mensaje, us_titulo], (err,result)=>{
+	});
+});
+
+app.get("/api/todosCat",(req,res)=>{
+	const sqlSelect = "SELECT * FROM catedraticos"
+	db.query(sqlSelect,(err,result)=>{
+		res.send(result)
+	});
+});
+
+app.get("/api/todosCursos",(req,res)=>{
+	const sqlSelect = "SELECT  * FROM cursos"
+	db.query(sqlSelect,(err,result)=>{
+		res.send(result)
+	});
+});
+
+app.get("/api/todosPubli",(req,res)=>{
+	const sqlSelect = 'SELECT  p.titulo,p.mensaje,p.fecha,u.nombres as "nUsuario",u.apellidos as "aUsuario",ca.nombres as "nCat",ca.apellidos as "aCat",cu.nombre as "nCurso" FROM publicaciones AS p INNER JOIN usuarios AS u ON p.usuario=u.id INNER JOIN catedraticos AS ca ON p.catedratico=ca.id INNER JOIN cursos AS cu ON p.curso=cu.id ORDER BY p.fecha ASC';
+	db.query(sqlSelect,(err,result)=>{
+		res.send(result)
+	});
+});
+
 app.get("/",(req, res)=>{
 	res.send("Funcionó");
 });

@@ -59,8 +59,9 @@ button {
   padding: 16px 8px 8px 8px;
 }
 
-#container {
+#container_card {
   max-width: 1200px;
+  text-align: left;
 
   /* Center the container in middle on horizontal axis */
   margin: 0 auto;
