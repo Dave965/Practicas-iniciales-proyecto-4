@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import {PublicacionIComponent} from "./PublicacionIndividualContainer/PIndividualComponent"
 import {ComentarioComponent} from "./ComentarioComponent/comentarioComponent"
 import {CrearComentarioComponent} from "./CrearComentarioComponent/crearCComponent"
@@ -26,11 +26,10 @@ const VerPublicacionComponent = (props) => {
 		      }
 			setComentarios(coms)
 	});
-//
+
 
 	return (
 		<div className="container">
-			<h1>Ver detalle de publicacion seleccionada</h1> 
 			<PublicacionIComponent titulo = {publi.titulo} contenido = {publi.mensaje} usuario = {publi.nUsuario+" "+publi.aUsuario} Curso = {publi.nCurso} Cat = {publi.nCat+" "+publi.aCat} fecha = {publi.fecha.slice(0, 10)}/>
 			{comentarios}
 			<CrearComentarioComponent usuario={props.usuario} publicacion={props.publicacion}/>

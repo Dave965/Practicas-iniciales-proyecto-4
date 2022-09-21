@@ -1,8 +1,9 @@
 import React from 'react';
 import './publicacionComponent.css';
-
+import { useNavigate } from "react-router-dom";
 
 function PublicacionComponent(props){
+  const navigate = useNavigate()
   return (
   <div id="container_card">
 
@@ -21,7 +22,7 @@ function PublicacionComponent(props){
           <p>publicacion hecha el: {props.fecha}</p>
           <p>Autor: {props.usuario}</p>
 
-          <button onClick={()=>{props.cambiar(props.id)}}>Leer Mas</button>
+          <button onClick={()=>{props.cambiar(props.id); navigate("/ver")}}>Leer Mas</button>
         </div>
 
 

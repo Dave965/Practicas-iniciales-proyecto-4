@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import {PantallaPrincipalComponent} from "./Components/PantallaPrincipal/pantallaPrincipalComponent"
 import {LoginComponent} from "./Components/PantallaLogin/loginComponent"
@@ -14,16 +15,18 @@ import './App.css';
 function App() {
   const [Sesion, setSesion] = useState("");
   const [Publicacion, setPublicacion] = useState("")
-  //<LoginComponent cambiarSesion={setSesion}/> 
-  //        <CrearPublicacionComponent usuario={Sesion}/>
-  //        <RegistroComponent/>
+  const [log_in,setLog_in] = useState(false)
   return (
-    <div className = "App">
-          <LoginComponent cambiarSesion={setSesion}/> 
-          <PantallaPrincipalComponent selecPublicacion={setPublicacion}/>
-          <VerPublicacionComponent publicacion={Publicacion} usuario={Sesion}/>
-    </div>
-      );
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LoginComponent cambiarSesion={setSesion} changelogin={setLog_in}/>}/>
+          <Route path="principal" element={log_in ? (<PantallaPrincipalComponent selecPublicacion={setPublicacion}/>):(<Navigate replace to={"/"} />)} />
+          <Route path="crear" element={log_in ? (<CrearPublicacionComponent usuario={Sesion} />):(<Navigate replace to={"/"} />)} />
+          <Route path="ver" element={log_in ? (<VerPublicacionComponent publicacion={Publicacion} usuario={Sesion}/>):(<Navigate replace to={"/"} />)} />
+          <Route path="registrar" element={<RegistroComponent />}/>
+      </Routes>
+    </BrowserRouter>
+    );
 }
 
 export default App;

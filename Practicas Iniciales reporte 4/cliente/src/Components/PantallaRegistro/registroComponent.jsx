@@ -1,8 +1,10 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
+import { useNavigate } from "react-router-dom";
 import "./registroComponent.css"
 import Axios from 'axios'
 
 const RegistroComponent = () => {
+	const navigate = useNavigate()
 	const [Nombres, setNombres] = useState("")
 	const [Apellidos, setApellidos] = useState("")
 	const [Carnet, setCarnet] = useState("")
@@ -19,6 +21,7 @@ const RegistroComponent = () => {
 			us_correo: Correo,
 		}).then(()=>{
 			alert("se ha registrado el usuario: "+Nombres+" "+Apellidos);
+			navigate("/");
 		})
 	};
 	return (

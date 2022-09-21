@@ -1,8 +1,11 @@
 import {PublicacionComponent} from "../PublicacionContainer/publicacionComponent"
 import Axios from 'axios'
-import React, {useState, useEffect} from 'react'
+import { useNavigate } from "react-router-dom";
+import React, {useState} from 'react'
+import "./pantallaPrincipalComponent.css"
 
 function PantallaPrincipalComponent(props) {
+  const navigate = useNavigate();
   const [publicaciones, setPublicaciones] = useState("")
   const pub = []
   Axios.get("http://localhost:3001/api/todosPubli").then((res)=>{
@@ -15,6 +18,7 @@ function PantallaPrincipalComponent(props) {
     });
   return(
     <div>
+      <button className="boton_crear" onClick={()=>{alert("Vamos a crear una nueva publicacion"); navigate("/crear");}}>crear publicacion</button>
       {publicaciones}
     </div>
   );
