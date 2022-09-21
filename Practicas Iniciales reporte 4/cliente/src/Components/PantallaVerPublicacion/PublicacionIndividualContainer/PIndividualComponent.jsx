@@ -1,8 +1,6 @@
 import React from 'react';
-import './publicacionComponent.css';
 
-
-function PublicacionComponent(props){
+function PublicacionIComponent(props){
   return (
   <div id="container_card">
 
@@ -20,8 +18,6 @@ function PublicacionComponent(props){
 
           <p>publicacion hecha el: {props.fecha}</p>
           <p>Autor: {props.usuario}</p>
-
-          <button onClick={()=>{props.cambiar(props.id)}}>Leer Mas</button>
         </div>
 
 
@@ -30,5 +26,4 @@ function PublicacionComponent(props){
   );
 }
 
-export {PublicacionComponent};
-
+export {PublicacionIComponent};

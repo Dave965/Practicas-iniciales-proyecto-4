@@ -1,0 +1,21 @@
+.container_comentario {
+  max-width: 100vw;
+
+  text-align: left;
+  
+  /* Add empty space above the container (20% of the view height) */
+  margin-bottom: 2vh;
+  margin-top: 2vh;
+}
+.card_comentario{
+    /* Change background color */
+  background-color: white;
+
+  /* Add border */
+  border: 1px solid #bacdd8;
+
+  /* Add space between the border and the content */
+  padding: 8px;
+
+  border-radius: 12px;
+}

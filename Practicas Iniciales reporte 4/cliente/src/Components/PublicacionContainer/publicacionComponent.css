@@ -60,7 +60,7 @@ button {
 }
 
 #container_card {
-  max-width: 1200px;
+  max-width: 60vw;
   text-align: left;
 
   /* Center the container in middle on horizontal axis */

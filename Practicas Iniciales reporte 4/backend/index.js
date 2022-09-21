@@ -52,6 +52,17 @@ app.post("/api/publicar",(req,res)=>{
 	});
 });
 
+app.post("/api/publicarComentario",(req,res)=>{
+	const us_usuario = req.body.us_usuario
+	const us_publicacion = req.body.us_publicacion
+	const us_mensaje = req.body.us_mensaje
+	const us_fecha = req.body.us_fecha
+
+	const sqlInsert = "INSERT INTO comentarios (publicacion, usuario, mensaje, fecha) VALUES (?, ?, ?, ?);"
+	db.query(sqlInsert, [us_publicacion, us_usuario, us_mensaje, us_fecha], (err,result)=>{
+	});
+});
+
 app.get("/api/todosCat",(req,res)=>{
 	const sqlSelect = "SELECT * FROM catedraticos"
 	db.query(sqlSelect,(err,result)=>{
@@ -67,8 +78,24 @@ app.get("/api/todosCursos",(req,res)=>{
 });
 
 app.get("/api/todosPubli",(req,res)=>{
-	const sqlSelect = 'SELECT  p.titulo,p.mensaje,p.fecha,u.nombres as "nUsuario",u.apellidos as "aUsuario",ca.nombres as "nCat",ca.apellidos as "aCat",cu.nombre as "nCurso" FROM publicaciones AS p INNER JOIN usuarios AS u ON p.usuario=u.id INNER JOIN catedraticos AS ca ON p.catedratico=ca.id INNER JOIN cursos AS cu ON p.curso=cu.id ORDER BY p.fecha ASC';
+	const sqlSelect = 'SELECT p.id, p.titulo,p.mensaje,p.fecha,u.nombres as "nUsuario",u.apellidos as "aUsuario",ca.nombres as "nCat",ca.apellidos as "aCat",cu.nombre as "nCurso" FROM publicaciones AS p INNER JOIN usuarios AS u ON p.usuario=u.id INNER JOIN catedraticos AS ca ON p.catedratico=ca.id INNER JOIN cursos AS cu ON p.curso=cu.id ORDER BY p.fecha ASC';
 	db.query(sqlSelect,(err,result)=>{
+		res.send(result)
+	});
+});
+
+app.post("/api/getPublicacion",(req,res)=>{
+	const id_publicacion= req.body.id_publicacion
+	const sqlSelect = 'SELECT p.id, p.titulo,p.mensaje,p.fecha,u.nombres as "nUsuario",u.apellidos as "aUsuario",ca.nombres as "nCat",ca.apellidos as "aCat",cu.nombre as "nCurso" FROM publicaciones AS p INNER JOIN usuarios AS u ON p.usuario=u.id INNER JOIN catedraticos AS ca ON p.catedratico=ca.id INNER JOIN cursos AS cu ON p.curso=cu.id WHERE p.id = (?)'
+	db.query(sqlSelect, [id_publicacion], (err,result)=>{
+		res.send(result)
+	});
+});
+
+app.post("/api/getComentarios",(req,res)=>{
+	const id_publicacion = req.body.id_publicacion
+	const sqlSelect = 'SELECT c.mensaje, c.fecha, u.nombres as "nUsuario",u.apellidos as "aUsuario" FROM comentarios AS c INNER JOIN usuarios AS u ON c.usuario=u.id WHERE c.publicacion = (?)'
+	db.query(sqlSelect, [id_publicacion], (err,result)=>{
 		res.send(result)
 	});
 });
